@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react'
-import * as XLSX from 'xlsx'
+import * as XLSX from 'xlsx-js-style'
 import { 
   BarChart3, 
   Target, 
@@ -12,7 +12,8 @@ import {
   Upload,
   FileSpreadsheet,
   PieChart as PieIcon,
-  Droplets
+  Droplets,
+  Download
 } from 'lucide-react'
 import { 
   BarChart, 
@@ -271,6 +272,138 @@ function App() {
     return { current, prev, obj, gap, rate, ecart };
   }, [analyzedData]);
 
+  const exportToExcel = () => {
+    const H_STYLE = { font: { bold: true, color: { rgb: "FFFFFF" }, sz: 12 }, fill: { fgColor: { rgb: "014182" } }, alignment: { horizontal: "center", vertical: "center" } };
+    const ZONE_STYLE = { font: { bold: true, color: { rgb: "0284C7" }, sz: 11 }, fill: { fgColor: { rgb: "E0F2FE" } } };
+    const T_ZONE_STYLE = { font: { bold: true, color: { rgb: "333333" } }, fill: { fgColor: { rgb: "E2E8F0" } } };
+    const SNDE_STYLE = { font: { bold: true, color: { rgb: "FFFFFF" }, sz: 13 }, fill: { fgColor: { rgb: "0EA5E9" } } };
+    
+    const getGapStyle = (gap) => {
+       const abs = Math.abs(gap);
+       if (gap >= 0) return { font: { bold: true, color: { rgb: abs > 100000 ? "FFFFFF" : "000000" } }, fill: { fgColor: { rgb: abs > 100000 ? "10B981" : "BBF7D0" } } };
+       return { font: { bold: true, color: { rgb: abs < 50000 ? "000000" : "FFFFFF" } }, fill: { fgColor: { rgb: abs < 50000 ? "FECACA" : "EF4444" } } };
+    };
+    
+    const getBadgeStyle = () => ({
+      font: { bold: true, color: { rgb: "10B981" } }, 
+      fill: { fgColor: { rgb: "D1FAE5" } },
+      alignment: { horizontal: "center" }
+    });
+
+    // --- FEUILLE 1 : COMPARAISON DES ENCAISSEMENTS GLOBAUX ---
+    const dataFeuille1 = [];
+    dataFeuille1.push([
+      {v: "NOUALKCHOTT / ZONE", s: H_STYLE}, 
+      {v: "EXP", s: H_STYLE}, 
+      {v: "CENTRE", s: H_STYLE}, 
+      {v: "ENCAISSEMENTS (ACTUEL)", s: H_STYLE}, 
+      {v: "ENCAISSEMENTS (PASSÉ)", s: H_STYLE}, 
+      {v: "ECART", s: H_STYLE}
+    ]);
+    
+    Object.entries(groupedData).forEach(([zone, centers]) => {
+       const sortedCenters = [...centers].sort((a,b) => b.ecart_mois - a.ecart_mois);
+       sortedCenters.forEach(c => {
+         dataFeuille1.push([
+            {v: zone}, 
+            {v: "SNDE"}, 
+            {v: c.name}, 
+            {v: c.current_total}, 
+            {v: c.prev_total}, 
+            {v: c.ecart_mois, s: getGapStyle(c.ecart_mois)}
+         ]);
+       });
+       const totalZCurrent = centers.reduce((s, c) => s + c.current_total, 0);
+       const totalZPrev = centers.reduce((s, c) => s + c.prev_total, 0);
+       dataFeuille1.push([
+          {v: `TOTAL ZONE ${zone}`, s: T_ZONE_STYLE}, 
+          {v: "", s: T_ZONE_STYLE}, 
+          {v: "", s: T_ZONE_STYLE}, 
+          {v: totalZCurrent, s: T_ZONE_STYLE}, 
+          {v: totalZPrev, s: T_ZONE_STYLE}, 
+          {v: totalZCurrent - totalZPrev, s: getGapStyle(totalZCurrent - totalZPrev)}
+       ]);
+       dataFeuille1.push([]); 
+    });
+    
+    dataFeuille1.push([
+      {v: "TOTAL GLOBAL SNDE", s: SNDE_STYLE}, 
+      {v: "", s: SNDE_STYLE}, 
+      {v: "", s: SNDE_STYLE}, 
+      {v: grandTotalSNDE.current, s: SNDE_STYLE}, 
+      {v: grandTotalSNDE.prev, s: SNDE_STYLE}, 
+      {v: grandTotalSNDE.ecart, s: getGapStyle(grandTotalSNDE.ecart)}
+    ]);
+    
+    // --- FEUILLE 2 : BASE DE DONNÉES COMPARATIVE ---
+    const dataFeuille2 = [];
+    dataFeuille2.push([
+      {v:"Zone", s:H_STYLE}, 
+      {v:"Centre d'Activité", s:H_STYLE}, 
+      {v:"Mois Actuel", s:H_STYLE}, 
+      {v:"Objectif", s:H_STYLE}, 
+      {v:"ECART DU MOIS", s:H_STYLE}, 
+      {v:"Taux d'Atteinte (%)", s:H_STYLE}
+    ]);
+    
+    Object.entries(groupedData).forEach(([zone, centers]) => {
+       dataFeuille2.push([
+         {v: `ZONE ${zone} (${centers.length} centres)`, s: ZONE_STYLE}, 
+         {v:"", s:ZONE_STYLE}, 
+         {v:"", s:ZONE_STYLE}, 
+         {v:"", s:ZONE_STYLE}, 
+         {v:"", s:ZONE_STYLE}, 
+         {v:"", s:ZONE_STYLE}
+       ]);
+       centers.forEach(c => {
+         const gap = c.current_total - c.objectif;
+         dataFeuille2.push([
+            {v: zone}, 
+            {v: c.name}, 
+            {v: c.current_total, s: {font: {bold:true}}}, 
+            {v: c.objectif}, 
+            {v: gap, s: gap < 0 ? { font: { bold: true, color: { rgb: "EF4444" } } } : {font: {bold:true}}}, 
+            {v: `${c.taux_atteinte}%`, s: getBadgeStyle()}
+         ]);
+       });
+       const totalZCurrent = centers.reduce((s, c) => s + c.current_total, 0);
+       const totalZObj = centers.reduce((s, c) => s + c.objectif, 0);
+       const gap = totalZCurrent - totalZObj;
+       const rate = totalZObj > 0 ? Math.round(Math.abs((totalZCurrent / totalZObj) * 100)) : 0;
+       
+       dataFeuille2.push([
+          {v:`TOTAL ZONE ${zone}`, s:T_ZONE_STYLE}, 
+          {v:"", s:T_ZONE_STYLE}, 
+          {v:totalZCurrent, s:T_ZONE_STYLE}, 
+          {v:totalZObj, s:T_ZONE_STYLE}, 
+          {v:gap, s: gap < 0 ? { font: { bold: true, color: { rgb: "EF4444" } }, fill: { fgColor: { rgb: "E2E8F0" } } } : {fill: {fgColor:{rgb:"E2E8F0"}}, font:{bold:true}}}, 
+          {v:`${rate}%`, s: Object.assign({}, getBadgeStyle(), T_ZONE_STYLE)}
+       ]);
+       dataFeuille2.push([]); 
+    });
+    
+    dataFeuille2.push([
+       {v:"TOTAL GLOBAL SNDE", s:SNDE_STYLE}, 
+       {v:"", s:SNDE_STYLE}, 
+       {v:grandTotalSNDE.current, s:SNDE_STYLE}, 
+       {v:grandTotalSNDE.obj, s:SNDE_STYLE}, 
+       {v:grandTotalSNDE.gap, s: grandTotalSNDE.gap < 0 ? { font: { bold: true, color: { rgb: "EF4444" } }, fill: { fgColor: { rgb: "0EA5E9" } } } : SNDE_STYLE}, 
+       {v:`${grandTotalSNDE.rate}%`, s: Object.assign({}, getBadgeStyle(), SNDE_STYLE)}
+    ]);
+
+    const ws1 = XLSX.utils.aoa_to_sheet(dataFeuille1);
+    const ws2 = XLSX.utils.aoa_to_sheet(dataFeuille2);
+
+    ws1['!cols'] = [{wch:25}, {wch:8}, {wch:25}, {wch:25}, {wch:25}, {wch:18}];
+    ws2['!cols'] = [{wch:25}, {wch:25}, {wch:18}, {wch:18}, {wch:18}, {wch:20}];
+
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, ws1, "Comparaison Globale");
+    XLSX.utils.book_append_sheet(workbook, ws2, "Base de Données");
+    
+    XLSX.writeFile(workbook, "Rapport_Encaissements_SNDE.xlsx");
+  };
+
   const hasDataLoaded = rawCurrent.length > 0 || rawPrev.length > 0;
 
   return (
@@ -379,7 +512,12 @@ function App() {
               <div className="glass-card" style={{ marginBottom: '3rem', padding: '0', overflow: 'hidden' }}>
                   <div style={{ padding: '2rem 2.5rem', borderBottom: '1px solid var(--glass-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                      <h3 style={{ fontSize: '1.5rem', fontWeight: 800 }}>COMPARAISON DES ENCAISSEMENTS GLOBAUX </h3>
-                     <div style={{ background: 'rgba(99, 102, 241, 0.1)', color: 'var(--primary)', padding: '6px 12px', borderRadius: '8px', fontSize: '0.8rem', fontWeight: 700 }}>SYNTHÈSE SNDE</div>
+                     <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
+                        <button onClick={exportToExcel} style={{ background: '#10b981', color: '#fff', border: 'none', padding: '8px 16px', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 700, fontSize: '0.9rem', boxShadow: '0 4px 12px rgba(16, 185, 129, 0.2)' }}>
+                           <Download size={18} /> EXPORTER EXCEL
+                        </button>
+                        <div style={{ background: 'rgba(99, 102, 241, 0.1)', color: 'var(--primary)', padding: '8px 12px', borderRadius: '8px', fontSize: '0.8rem', fontWeight: 700 }}>SYNTHÈSE SNDE</div>
+                     </div>
                   </div>
                   <div style={{ maxHeight: '800px', overflowY: 'auto', padding: '1rem' }}>
                      <table className="excel-table">
@@ -399,10 +537,10 @@ function App() {
                              const totalZPrev = centers.reduce((s, c) => s + c.prev_total, 0);
                              const totalZEcart = totalZCurrent - totalZPrev;
 
-                             return (
-                               <React.Fragment key={zone}>
-                                 {centers.map((c) => {
-                                   const isPos = c.ecart_mois >= 0;
+                               return (
+                                 <React.Fragment key={zone}>
+                                   {[...centers].sort((a,b) => b.ecart_mois - a.ecart_mois).map((c) => {
+                                     const isPos = c.ecart_mois >= 0;
                                    const absEcart = Math.abs(c.ecart_mois);
                                    let ecartBg = 'rgba(239, 68, 68, 0.8)';
                                    if (isPos) {
