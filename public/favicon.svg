@@ -1,0 +1,32 @@
+<svg viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Thin Blue Circle -->
+  <circle cx="50" cy="45" r="42" fill="none" stroke="#1f70b8" stroke-width="1.5" />
+  
+  <!-- Green Tap Base & Pipe -->
+  <!-- Left horizontal arm -->
+  <path d="M 22 35 H 32 V 42 H 22 Z" fill="#669b61" />
+  <!-- Main horizontal pipe, dropping down -->
+  <path d="M 30 35 L 55 35 C 60 35, 64 36, 64 42 V 50 H 56 V 42 C 56 40, 53 40, 50 40 L 30 40 Z" fill="#669b61" />
+  <!-- Inner water line (blue inside the pipe) -->
+  <path d="M 23 37.5 H 48 C 52 37.5, 54 38.5, 55 41 V 48 H 57 V 41 C 56 37, 52 36, 48 36 H 23 Z" fill="#51b5e5" />
+  
+  <!-- Tap Handle Structure -->
+  <path d="M 38 25 H 48 V 35 H 38 Z" fill="#669b61" />
+  <circle cx="43" cy="27" r="5" fill="#669b61" />
+  <path d="M 41 12 H 45 V 23 H 41 Z" fill="#669b61" />
+  <path d="M 36 12 H 50 V 16 H 36 Z" fill="#669b61" />
+
+  <!-- Cyan Droplet -->
+  <path d="M 60 55 C 55 65, 65 65, 60 55 Z" fill="#51b5e5" />
+  
+  <!-- Three Blue Waves -->
+  <!-- top wave -->
+  <path d="M 26 65 Q 38 60, 50 65 T 72 65" fill="none" stroke="#1f70b8" stroke-width="4" stroke-linecap="round" />
+  <!-- middle wave -->
+  <path d="M 26 73 Q 38 68, 50 73 T 74 73" fill="none" stroke="#1f70b8" stroke-width="4" stroke-linecap="round" />
+  <!-- bottom wave -->
+  <path d="M 26 81 Q 38 76, 50 81 T 70 81" fill="none" stroke="#1f70b8" stroke-width="4" stroke-linecap="round" />
+  
+  <!-- SNDE Text at bottom -->
+  <text x="50" y="110" font-family="Arial, sans-serif" font-weight="900" font-size="20" fill="#0b7a9f" text-anchor="middle" letter-spacing="1">SNDE</text>
+</svg>

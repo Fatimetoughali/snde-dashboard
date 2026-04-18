@@ -1,0 +1,1286 @@
+{
+  "metadata": {
+    "generatedAt": "2026-04-17T14:12:37.113Z",
+    "period": "Avril 2026"
+  },
+  "centers": [
+    {
+      "zone": "NORD",
+      "id": 41,
+      "name": "TEYARETT 2",
+      "objectif": 2530000,
+      "cumul": 1049827.592,
+      "ecart": -1480172.408,
+      "taux": 41.49516173913043
+    },
+    {
+      "zone": "NORD",
+      "id": 44,
+      "name": "DAR NAIM-NORD",
+      "objectif": 1650000.0000000002,
+      "cumul": 424042.30000000005,
+      "ecart": -1225957.7000000002,
+      "taux": 25.69953333333333
+    },
+    {
+      "zone": "NORD",
+      "id": 48,
+      "name": "DAR NAIM-SUD 2",
+      "objectif": 2527668,
+      "cumul": 468417.49999999994,
+      "ecart": -2059250.5,
+      "taux": 18.53160699902044
+    },
+    {
+      "zone": "NORD",
+      "id": 86,
+      "name": "WAD NAGA",
+      "objectif": 1561340.0000000002,
+      "cumul": 583133.1,
+      "ecart": -978206.9000000003,
+      "taux": 37.348245737635615
+    },
+    {
+      "zone": "NORD",
+      "id": 47,
+      "name": "TEYARETT 1",
+      "objectif": 2530000,
+      "cumul": 789965.59,
+      "ecart": -1740034.4100000001,
+      "taux": 31.223936363636362
+    },
+    {
+      "zone": "NORD",
+      "id": 98,
+      "name": "TOUJOUNINE",
+      "objectif": 3300000.0000000005,
+      "cumul": 494924.01,
+      "ecart": -2805075.99,
+      "taux": 14.99769727272727
+    },
+    {
+      "zone": "NORD",
+      "id": 96,
+      "name": "KSAR",
+      "objectif": 4400000,
+      "cumul": 1460235.87,
+      "ecart": -2939764.13,
+      "taux": 33.18717886363637
+    },
+    {
+      "zone": "NORD",
+      "id": 52,
+      "name": "MELLAH 3",
+      "objectif": 1810468.0000000002,
+      "cumul": 447698.68999999994,
+      "ecart": -1362769.3100000003,
+      "taux": 24.728340407010776
+    },
+    {
+      "zone": "NORD",
+      "id": 99,
+      "name": "DAR NAIM-SUD 1",
+      "objectif": 2389332,
+      "cumul": 512338.89,
+      "ecart": -1876993.1099999999,
+      "taux": 21.442766848642215
+    },
+    {
+      "zone": "OUEST",
+      "id": 91,
+      "name": "TVZ NORD 1",
+      "objectif": 8800000,
+      "cumul": 2474469.5700000003,
+      "ecart": -6325530.43,
+      "taux": 28.118972386363637
+    },
+    {
+      "zone": "OUEST",
+      "id": 55,
+      "name": "TVZ NORD 3",
+      "objectif": 4480630,
+      "cumul": 2145647.39,
+      "ecart": -2334982.61,
+      "taux": 47.887180820554256
+    },
+    {
+      "zone": "OUEST",
+      "id": 97,
+      "name": "TVZ NORD 2",
+      "objectif": 7154840.000000001,
+      "cumul": 1621240.47,
+      "ecart": -5533599.530000001,
+      "taux": 22.659353248989493
+    },
+    {
+      "zone": "OUEST",
+      "id": 43,
+      "name": "TVZ SUD",
+      "objectif": 5518590,
+      "cumul": 1397501.7,
+      "ecart": -4121088.3,
+      "taux": 25.32352829255299
+    },
+    {
+      "zone": "OUEST",
+      "id": 93,
+      "name": "SEBKHA",
+      "objectif": 2402400,
+      "cumul": 518901.79000000004,
+      "ecart": -1883498.21,
+      "taux": 21.59930860805861
+    },
+    {
+      "zone": "OUEST",
+      "id": 92,
+      "name": "CAPITALE",
+      "objectif": 7150000.000000001,
+      "cumul": 914023.89,
+      "ecart": -6235976.110000001,
+      "taux": 12.783550909090907
+    },
+    {
+      "zone": "SUD",
+      "id": 89,
+      "name": "RIYAD",
+      "objectif": 2403878.4000000004,
+      "cumul": 740798.561,
+      "ecart": -1663079.8390000004,
+      "taux": 30.816806748627545
+    },
+    {
+      "zone": "SUD",
+      "id": 95,
+      "name": "CARREFOUR",
+      "objectif": 2566080,
+      "cumul": 982564.6,
+      "ecart": -1583515.4,
+      "taux": 38.290489774286065
+    },
+    {
+      "zone": "SUD",
+      "id": 46,
+      "name": "MELLAH 2",
+      "objectif": 2038168.0000000002,
+      "cumul": 335529.79000000004,
+      "ecart": -1702638.2100000002,
+      "taux": 16.462322536709436
+    },
+    {
+      "zone": "SUD",
+      "id": 50,
+      "name": "TARHIL 2",
+      "objectif": 1140282,
+      "cumul": 272436.08999999997,
+      "ecart": -867845.91,
+      "taux": 23.891992507116658
+    },
+    {
+      "zone": "SUD",
+      "id": 90,
+      "name": "ARAFAT",
+      "objectif": 3300000.0000000005,
+      "cumul": 610061.38,
+      "ecart": -2689938.6200000006,
+      "taux": 18.48670848484848
+    },
+    {
+      "zone": "SUD",
+      "id": 49,
+      "name": "TARHIL 1",
+      "objectif": 1905090.0000000002,
+      "cumul": 419997.1,
+      "ecart": -1485092.9000000004,
+      "taux": 22.046050317832748
+    },
+    {
+      "zone": "SUD",
+      "id": 94,
+      "name": "EL MINA",
+      "objectif": 6136680.000000001,
+      "cumul": 556738.19,
+      "ecart": -5579941.8100000005,
+      "taux": 9.072302776093911
+    },
+    {
+      "zone": "SUD",
+      "id": 42,
+      "name": "CARREFOUR 2",
+      "objectif": 2325840,
+      "cumul": 536080.3999999999,
+      "ecart": -1789759.6,
+      "taux": 23.048894162969074
+    },
+    {
+      "zone": "SUD",
+      "id": 45,
+      "name": "MELLAH 1",
+      "objectif": 2530000,
+      "cumul": 430622.99,
+      "ecart": -2099377.01,
+      "taux": 17.020671541501976
+    },
+    {
+      "zone": "SUD",
+      "id": 51,
+      "name": "TARHIL 3",
+      "objectif": 1182654,
+      "cumul": 268593.58999999997,
+      "ecart": -914060.41,
+      "taux": 22.711087942881008
+    },
+    {
+      "zone": "SUD",
+      "id": 53,
+      "name": "RIYADH 3",
+      "objectif": 1946670.0000000002,
+      "cumul": 523973.89,
+      "ecart": -1422696.1100000003,
+      "taux": 26.916420862293037
+    },
+    {
+      "zone": "AUTRES",
+      "id": 86,
+      "name": "WAD NAGA",
+      "objectif": 1561340.0000000002,
+      "cumul": 583133.1,
+      "ecart": -978206.9000000003,
+      "taux": 37.348245737635615
+    },
+    {
+      "zone": "AUTRES",
+      "id": 96,
+      "name": "KSAR",
+      "objectif": 4400000,
+      "cumul": 1460235.87,
+      "ecart": -2939764.13,
+      "taux": 33.18717886363637
+    },
+    {
+      "zone": "AUTRES",
+      "id": 41,
+      "name": "TEYARETT 2",
+      "objectif": 2530000,
+      "cumul": 1049827.592,
+      "ecart": -1480172.408,
+      "taux": 41.49516173913043
+    },
+    {
+      "zone": "AUTRES",
+      "id": 52,
+      "name": "MELLAH 3",
+      "objectif": 1810468.0000000002,
+      "cumul": 447698.68999999994,
+      "ecart": -1362769.3100000003,
+      "taux": 24.728340407010776
+    },
+    {
+      "zone": "AUTRES",
+      "id": 44,
+      "name": "DAR NAIM-NORD",
+      "objectif": 1650000.0000000002,
+      "cumul": 424042.30000000005,
+      "ecart": -1225957.7000000002,
+      "taux": 25.69953333333333
+    },
+    {
+      "zone": "AUTRES",
+      "id": 48,
+      "name": "DAR NAIM-SUD 2",
+      "objectif": 2527668,
+      "cumul": 468417.49999999994,
+      "ecart": -2059250.5,
+      "taux": 18.53160699902044
+    },
+    {
+      "zone": "AUTRES",
+      "id": 47,
+      "name": "TEYARETT 1",
+      "objectif": 2530000,
+      "cumul": 789965.59,
+      "ecart": -1740034.4100000001,
+      "taux": 31.223936363636362
+    },
+    {
+      "zone": "AUTRES",
+      "id": 99,
+      "name": "DAR NAIM-SUD 1",
+      "objectif": 2389332,
+      "cumul": 512338.89,
+      "ecart": -1876993.1099999999,
+      "taux": 21.442766848642215
+    },
+    {
+      "zone": "AUTRES",
+      "id": 98,
+      "name": "TOUJOUNINE",
+      "objectif": 3300000.0000000005,
+      "cumul": 494924.01,
+      "ecart": -2805075.99,
+      "taux": 14.99769727272727
+    },
+    {
+      "zone": "AUTRES",
+      "id": 95,
+      "name": "CARREFOUR",
+      "objectif": 2566080,
+      "cumul": 982564.6,
+      "ecart": -1583515.4,
+      "taux": 38.290489774286065
+    },
+    {
+      "zone": "AUTRES",
+      "id": 89,
+      "name": "RIYAD",
+      "objectif": 2403878.4000000004,
+      "cumul": 740798.561,
+      "ecart": -1663079.8390000004,
+      "taux": 30.816806748627545
+    },
+    {
+      "zone": "AUTRES",
+      "id": 53,
+      "name": "RIYADH 2",
+      "objectif": 1946670.0000000002,
+      "cumul": 523973.89,
+      "ecart": -1422696.1100000003,
+      "taux": 26.916420862293037
+    },
+    {
+      "zone": "AUTRES",
+      "id": 50,
+      "name": "TARHIL 2",
+      "objectif": 1140282,
+      "cumul": 272436.08999999997,
+      "ecart": -867845.91,
+      "taux": 23.891992507116658
+    },
+    {
+      "zone": "AUTRES",
+      "id": 42,
+      "name": "CARREFOUR 2",
+      "objectif": 2325840,
+      "cumul": 536080.3999999999,
+      "ecart": -1789759.6,
+      "taux": 23.048894162969074
+    },
+    {
+      "zone": "AUTRES",
+      "id": 51,
+      "name": "TARHIL 3",
+      "objectif": 1182654,
+      "cumul": 268593.58999999997,
+      "ecart": -914060.41,
+      "taux": 22.711087942881008
+    },
+    {
+      "zone": "AUTRES",
+      "id": 49,
+      "name": "TARHIL 1",
+      "objectif": 1905090.0000000002,
+      "cumul": 419997.1,
+      "ecart": -1485092.9000000004,
+      "taux": 22.046050317832748
+    },
+    {
+      "zone": "AUTRES",
+      "id": 90,
+      "name": "ARAFAT",
+      "objectif": 3300000.0000000005,
+      "cumul": 610061.38,
+      "ecart": -2689938.6200000006,
+      "taux": 18.48670848484848
+    },
+    {
+      "zone": "AUTRES",
+      "id": 45,
+      "name": "MELLAH 1",
+      "objectif": 2530000,
+      "cumul": 430622.99,
+      "ecart": -2099377.01,
+      "taux": 17.020671541501976
+    },
+    {
+      "zone": "AUTRES",
+      "id": 46,
+      "name": "MELLAH 2",
+      "objectif": 2038168.0000000002,
+      "cumul": 335529.79000000004,
+      "ecart": -1702638.2100000002,
+      "taux": 16.462322536709436
+    },
+    {
+      "zone": "AUTRES",
+      "id": 94,
+      "name": "EL MINA",
+      "objectif": 6136680.000000001,
+      "cumul": 556738.19,
+      "ecart": -5579941.8100000005,
+      "taux": 9.072302776093911
+    },
+    {
+      "zone": "AUTRES",
+      "id": 55,
+      "name": "TVZ NORD 3",
+      "objectif": 4480630,
+      "cumul": 2145647.39,
+      "ecart": -2334982.61,
+      "taux": 47.887180820554256
+    },
+    {
+      "zone": "AUTRES",
+      "id": 43,
+      "name": "TVZ SUD",
+      "objectif": 5518590,
+      "cumul": 1397501.7,
+      "ecart": -4121088.3,
+      "taux": 25.32352829255299
+    },
+    {
+      "zone": "AUTRES",
+      "id": 97,
+      "name": "TVZ NORD 2",
+      "objectif": 7154840.000000001,
+      "cumul": 1621240.47,
+      "ecart": -5533599.530000001,
+      "taux": 22.659353248989493
+    },
+    {
+      "zone": "AUTRES",
+      "id": 93,
+      "name": "SEBKHA",
+      "objectif": 2402400,
+      "cumul": 518901.79000000004,
+      "ecart": -1883498.21,
+      "taux": 21.59930860805861
+    },
+    {
+      "zone": "AUTRES",
+      "id": 91,
+      "name": "TVZ NORD 1",
+      "objectif": 8800000,
+      "cumul": 2474469.5700000003,
+      "ecart": -6325530.43,
+      "taux": 28.118972386363637
+    },
+    {
+      "zone": "AUTRES",
+      "id": 92,
+      "name": "CAPITALE",
+      "objectif": 7150000.000000001,
+      "cumul": 914023.89,
+      "ecart": -6235976.110000001,
+      "taux": 12.783550909090907
+    },
+    {
+      "zone": "AUTRES",
+      "id": 80,
+      "name": "NOUADHIBOU 2",
+      "objectif": 3860557,
+      "cumul": 920851.79,
+      "ecart": -2939705.21,
+      "taux": 23.85282201506156
+    },
+    {
+      "zone": "AUTRES",
+      "id": 60,
+      "name": "NOUADHIBOU 1",
+      "objectif": 6553072.9,
+      "cumul": 895118.23,
+      "ecart": -5657954.67,
+      "taux": 13.659518880066173
+    },
+    {
+      "zone": "AUTRES",
+      "id": 40,
+      "name": "NOUADHIBOU 3",
+      "objectif": 2422629,
+      "cumul": 572432.8600000001,
+      "ecart": -1850196.14,
+      "taux": 23.62858118184832
+    },
+    {
+      "zone": "AUTRES",
+      "id": 15,
+      "name": "CHAMI",
+      "objectif": 261580.00000000003,
+      "cumul": 7309,
+      "ecart": -254271.00000000003,
+      "taux": 2.7941738665035554
+    },
+    {
+      "zone": "AUTRES",
+      "id": 71,
+      "name": "NEMA",
+      "objectif": 1707327,
+      "cumul": 442720.4,
+      "ecart": -1264606.6,
+      "taux": 25.93061551770692
+    },
+    {
+      "zone": "AUTRES",
+      "id": 35,
+      "name": "ADEL BAGROU",
+      "objectif": 453089,
+      "cumul": 99302.5,
+      "ecart": -353786.5,
+      "taux": 21.91677573280305
+    },
+    {
+      "zone": "AUTRES",
+      "id": 70,
+      "name": "AIOUN EL ATROUSS",
+      "objectif": 1053412,
+      "cumul": 241886.19,
+      "ecart": -811525.81,
+      "taux": 22.96216390168329
+    },
+    {
+      "zone": "AUTRES",
+      "id": 101,
+      "name": "AIWNAT ZBEL  ",
+      "objectif": 94233,
+      "cumul": 8629,
+      "ecart": -85604,
+      "taux": 9.157089342374752
+    },
+    {
+      "zone": "AUTRES",
+      "id": 72,
+      "name": "TIMBEDRA",
+      "objectif": 855901,
+      "cumul": 292900.7,
+      "ecart": -563000.3,
+      "taux": 34.22132933598629
+    },
+    {
+      "zone": "AUTRES",
+      "id": 34,
+      "name": "AMOURJ",
+      "objectif": 120057,
+      "cumul": 70653.7,
+      "ecart": -49403.3,
+      "taux": 58.850129521810466
+    },
+    {
+      "zone": "AUTRES",
+      "id": 85,
+      "name": "TINTANE NOUVEAU",
+      "objectif": 252646,
+      "cumul": 161494.8,
+      "ecart": -91151.20000000001,
+      "taux": 63.92137615477783
+    },
+    {
+      "zone": "AUTRES",
+      "id": 33,
+      "name": "OULATA",
+      "objectif": 109280,
+      "cumul": 15355.3,
+      "ecart": -93924.7,
+      "taux": 14.051336017569547
+    },
+    {
+      "zone": "AUTRES",
+      "id": 37,
+      "name": "VASSALA",
+      "objectif": 353089,
+      "cumul": 95096,
+      "ecart": -257993,
+      "taux": 26.93258640172874
+    },
+    {
+      "zone": "AUTRES",
+      "id": 84,
+      "name": "BASSIKNOU",
+      "objectif": 571633,
+      "cumul": 185201,
+      "ecart": -386432,
+      "taux": 32.3985844064286
+    },
+    {
+      "zone": "AUTRES",
+      "id": 32,
+      "name": "TAMCHAKET",
+      "objectif": 256721,
+      "cumul": 8785.7,
+      "ecart": -247935.3,
+      "taux": 3.422275544267902
+    },
+    {
+      "zone": "AUTRES",
+      "id": 81,
+      "name": "DJIGUENI",
+      "objectif": 101711,
+      "cumul": 1421,
+      "ecart": -100290,
+      "taux": 1.3970956926979383
+    },
+    {
+      "zone": "AUTRES",
+      "id": 88,
+      "name": "N'BEIKETTE LEHWACH",
+      "objectif": 39549,
+      "cumul": 0,
+      "ecart": -39549,
+      "taux": 0
+    },
+    {
+      "zone": "AUTRES",
+      "id": 102,
+      "name": "TOUIL",
+      "objectif": 126513,
+      "cumul": 0,
+      "ecart": -126513,
+      "taux": 0
+    },
+    {
+      "zone": "AUTRES",
+      "id": 83,
+      "name": "KOUBENNI",
+      "objectif": 170012,
+      "cumul": 1492,
+      "ecart": -168520,
+      "taux": 0.8775851116391784
+    },
+    {
+      "zone": "AUTRES",
+      "id": 38,
+      "name": "TERMESSA",
+      "objectif": 60999,
+      "cumul": 0,
+      "ecart": -60999,
+      "taux": 0
+    },
+    {
+      "zone": "AUTRES",
+      "id": 29,
+      "name": "OULD YENGE",
+      "objectif": 200709.00000000003,
+      "cumul": 138418.89998779295,
+      "ecart": -62290.10001220708,
+      "taux": 68.96496917815989
+    },
+    {
+      "zone": "AUTRES",
+      "id": 65,
+      "name": "KAEDI",
+      "objectif": 1486335,
+      "cumul": 416206.47000000003,
+      "ecart": -1070128.53,
+      "taux": 28.00219802399863
+    },
+    {
+      "zone": "AUTRES",
+      "id": 67,
+      "name": "ALEG",
+      "objectif": 867509,
+      "cumul": 213845.28999999998,
+      "ecart": -653663.71,
+      "taux": 24.650498150451465
+    },
+    {
+      "zone": "AUTRES",
+      "id": 61,
+      "name": "BOGHE",
+      "objectif": 481866,
+      "cumul": 106071,
+      "ecart": -375795,
+      "taux": 22.012551207182078
+    },
+    {
+      "zone": "AUTRES",
+      "id": 104,
+      "name": "MAAL",
+      "objectif": 71157,
+      "cumul": 11731,
+      "ecart": -59426,
+      "taux": 16.486080076450666
+    },
+    {
+      "zone": "AUTRES",
+      "id": 105,
+      "name": "LEXEIBA",
+      "objectif": 377466,
+      "cumul": 31682.7,
+      "ecart": -345783.3,
+      "taux": 8.393524184959706
+    },
+    {
+      "zone": "AUTRES",
+      "id": 103,
+      "name": "BOUHDIDA",
+      "objectif": 166229,
+      "cumul": 42033.3,
+      "ecart": -124195.7,
+      "taux": 25.286382039235033
+    },
+    {
+      "zone": "AUTRES",
+      "id": 77,
+      "name": "MAGTALAHAJAR",
+      "objectif": 776603,
+      "cumul": 169833.7,
+      "ecart": -606769.3,
+      "taux": 21.86879267785471
+    },
+    {
+      "zone": "AUTRES",
+      "id": 75,
+      "name": "SELIBABY",
+      "objectif": 1262280,
+      "cumul": 530352.86,
+      "ecart": -731927.14,
+      "taux": 42.01546883417308
+    },
+    {
+      "zone": "AUTRES",
+      "id": 25,
+      "name": "BABABE",
+      "objectif": 248584,
+      "cumul": 51326.17,
+      "ecart": -197257.83000000002,
+      "taux": 20.647414958323946
+    },
+    {
+      "zone": "AUTRES",
+      "id": 87,
+      "name": "CHOGGAR",
+      "objectif": 495486,
+      "cumul": 33292.6,
+      "ecart": -462193.4,
+      "taux": 6.719180763936822
+    },
+    {
+      "zone": "AUTRES",
+      "id": 28,
+      "name": "MONGUEL",
+      "objectif": 161553,
+      "cumul": 7821.9,
+      "ecart": -153731.1,
+      "taux": 4.841692819074854
+    },
+    {
+      "zone": "AUTRES",
+      "id": 26,
+      "name": "M'BAGNE",
+      "objectif": 139097,
+      "cumul": 3020.7,
+      "ecart": -136076.3,
+      "taux": 2.1716499996405387
+    },
+    {
+      "zone": "AUTRES",
+      "id": 76,
+      "name": "M'BOUT",
+      "objectif": 396467.00000000006,
+      "cumul": 6296.3,
+      "ecart": -390170.70000000007,
+      "taux": 1.5881019101211449
+    },
+    {
+      "zone": "AUTRES",
+      "id": 36,
+      "name": "SANGRAVA",
+      "objectif": 195026,
+      "cumul": 18751.4,
+      "ecart": -176274.6,
+      "taux": 9.61482058802416
+    },
+    {
+      "zone": "AUTRES",
+      "id": 27,
+      "name": "MAGHAMA",
+      "objectif": 169036,
+      "cumul": 4574,
+      "ecart": -164462,
+      "taux": 2.7059324640904894
+    },
+    {
+      "zone": "AUTRES",
+      "id": 107,
+      "name": "GHABOU",
+      "objectif": 124784.00000000001,
+      "cumul": 983,
+      "ecart": -123801.00000000001,
+      "taux": 0.7877612514424925
+    },
+    {
+      "zone": "AUTRES",
+      "id": 106,
+      "name": "WOMPOU",
+      "objectif": 83604,
+      "cumul": 1192,
+      "ecart": -82412,
+      "taux": 1.4257691019568441
+    },
+    {
+      "zone": "AUTRES",
+      "id": 66,
+      "name": "ATAR",
+      "objectif": 820145,
+      "cumul": 243454.50000000003,
+      "ecart": -576690.5,
+      "taux": 29.68432411341897
+    },
+    {
+      "zone": "AUTRES",
+      "id": 14,
+      "name": "BENICHAB",
+      "objectif": 175919,
+      "cumul": 13614,
+      "ecart": -162305,
+      "taux": 7.738788874425162
+    },
+    {
+      "zone": "AUTRES",
+      "id": 17,
+      "name": "CHINGUITY",
+      "objectif": 155016,
+      "cumul": 18860.9,
+      "ecart": -136155.1,
+      "taux": 12.167066625380606
+    },
+    {
+      "zone": "AUTRES",
+      "id": 16,
+      "name": "AOUJEFT",
+      "objectif": 139439,
+      "cumul": 14931.3,
+      "ecart": -124507.7,
+      "taux": 10.70812326537052
+    },
+    {
+      "zone": "AUTRES",
+      "id": 62,
+      "name": "AKJOUJT",
+      "objectif": 739055,
+      "cumul": 24508.8,
+      "ecart": -714546.2,
+      "taux": 3.3162349216228835
+    },
+    {
+      "zone": "AUTRES",
+      "id": 18,
+      "name": "OUADANE",
+      "objectif": 100429,
+      "cumul": 1746,
+      "ecart": -98683,
+      "taux": 1.7385416562944966
+    },
+    {
+      "zone": "AUTRES",
+      "id": 21,
+      "name": "FDEIRICK",
+      "objectif": 74255,
+      "cumul": 1493,
+      "ecart": -72762,
+      "taux": 2.0106390142077974
+    },
+    {
+      "zone": "AUTRES",
+      "id": 39,
+      "name": "KIFFA 2",
+      "objectif": 850000,
+      "cumul": 262281.80000000005,
+      "ecart": -587718.2,
+      "taux": 30.856682352941185
+    },
+    {
+      "zone": "AUTRES",
+      "id": 74,
+      "name": "GUEROU",
+      "objectif": 457930,
+      "cumul": 61337.7,
+      "ecart": -396592.3,
+      "taux": 13.394558120236717
+    },
+    {
+      "zone": "AUTRES",
+      "id": 73,
+      "name": "KIFFA 1",
+      "objectif": 1150000,
+      "cumul": 281223.6,
+      "ecart": -868776.4,
+      "taux": 24.45422608695652
+    },
+    {
+      "zone": "AUTRES",
+      "id": 78,
+      "name": "TIDJIKJA",
+      "objectif": 820145,
+      "cumul": 76844.97,
+      "ecart": -743300.03,
+      "taux": 9.369680971047803
+    },
+    {
+      "zone": "AUTRES",
+      "id": 30,
+      "name": "BARKEOL",
+      "objectif": 56962,
+      "cumul": 1981,
+      "ecart": -54981,
+      "taux": 3.4777571012253783
+    },
+    {
+      "zone": "AUTRES",
+      "id": 31,
+      "name": "BOUMDEID",
+      "objectif": 103221,
+      "cumul": 3513,
+      "ecart": -99708,
+      "taux": 3.403377219751795
+    },
+    {
+      "zone": "AUTRES",
+      "id": 82,
+      "name": "KANKOUSSA",
+      "objectif": 242456,
+      "cumul": 28512.499999999996,
+      "ecart": -213943.5,
+      "taux": 11.759865707592304
+    },
+    {
+      "zone": "AUTRES",
+      "id": 19,
+      "name": "MOUDJERIA",
+      "objectif": 77520,
+      "cumul": 5526,
+      "ecart": -71994,
+      "taux": 7.128482972136223
+    },
+    {
+      "zone": "AUTRES",
+      "id": 20,
+      "name": "TICHIT",
+      "objectif": 80802,
+      "cumul": 608.2,
+      "ecart": -80193.8,
+      "taux": 0.7527041409866093
+    },
+    {
+      "zone": "AUTRES",
+      "id": 23,
+      "name": "RKIZ",
+      "objectif": 569212,
+      "cumul": 176643.30000000002,
+      "ecart": -392568.69999999995,
+      "taux": 31.032954329845474
+    },
+    {
+      "zone": "AUTRES",
+      "id": 64,
+      "name": "ROSSO",
+      "objectif": 1293702,
+      "cumul": 409021.68999999994,
+      "ecart": -884680.31,
+      "taux": 31.61637610516177
+    },
+    {
+      "zone": "AUTRES",
+      "id": 68,
+      "name": "BOUTILIMIT",
+      "objectif": 1084933,
+      "cumul": 165125.99000000002,
+      "ecart": -919807.01,
+      "taux": 15.219925101365709
+    },
+    {
+      "zone": "AUTRES",
+      "id": 69,
+      "name": "MEDERDRA",
+      "objectif": 400443,
+      "cumul": 72523.5,
+      "ecart": -327919.5,
+      "taux": 18.110817269873614
+    },
+    {
+      "zone": "AUTRES",
+      "id": 108,
+      "name": "TEKANE",
+      "objectif": 69612,
+      "cumul": 1187,
+      "ecart": -68425,
+      "taux": 1.7051657760156294
+    },
+    {
+      "zone": "AUTRES",
+      "id": 24,
+      "name": "KEUR MACENE",
+      "objectif": 268612,
+      "cumul": 12059.4,
+      "ecart": -256552.6,
+      "taux": 4.4895239229818475
+    }
+  ],
+  "sectors": [
+    {
+      "name": "Privés",
+      "total": 28324787.142987803,
+      "avg": 2360398.9285823167,
+      "trend": [
+        {
+          "date": "2026-04-01",
+          "amount": 2543283.959987794
+        },
+        {
+          "date": "2026-04-02",
+          "amount": 2672891.1199999982
+        },
+        {
+          "date": "2026-04-03",
+          "amount": 1846066.3699999999
+        },
+        {
+          "date": "2026-04-04",
+          "amount": 611394.9000000001
+        },
+        {
+          "date": "2026-04-05",
+          "amount": 407021.80000000005
+        },
+        {
+          "date": "2026-04-06",
+          "amount": 3471841.2010000027
+        },
+        {
+          "date": "2026-04-07",
+          "amount": 3505963.4800000037
+        },
+        {
+          "date": "2026-04-08",
+          "amount": 3139163.8420000025
+        },
+        {
+          "date": "2026-04-09",
+          "amount": 4152306.5300000007
+        },
+        {
+          "date": "2026-04-10",
+          "amount": 2926945.7399999993
+        },
+        {
+          "date": "2026-04-11",
+          "amount": 2056358.2999999993
+        },
+        {
+          "date": "2026-04-12",
+          "amount": 991549.9
+        }
+      ]
+    },
+    {
+      "name": "Direction de Budget\r\n",
+      "total": 58670,
+      "avg": 7333.75,
+      "trend": [
+        {
+          "date": "2026-04-01",
+          "amount": 1300
+        },
+        {
+          "date": "2026-04-02",
+          "amount": 1370
+        },
+        {
+          "date": "2026-04-03",
+          "amount": 2000
+        },
+        {
+          "date": "2026-04-06",
+          "amount": 3500
+        },
+        {
+          "date": "2026-04-07",
+          "amount": 38500
+        },
+        {
+          "date": "2026-04-08",
+          "amount": 5500
+        },
+        {
+          "date": "2026-04-09",
+          "amount": 4500
+        },
+        {
+          "date": "2026-04-12",
+          "amount": 2000
+        }
+      ]
+    },
+    {
+      "name": "Potences",
+      "total": 51368.6,
+      "avg": 5136.86,
+      "trend": [
+        {
+          "date": "2026-04-02",
+          "amount": 6668.2
+        },
+        {
+          "date": "2026-04-03",
+          "amount": 268
+        },
+        {
+          "date": "2026-04-04",
+          "amount": 1813
+        },
+        {
+          "date": "2026-04-06",
+          "amount": 1853
+        },
+        {
+          "date": "2026-04-07",
+          "amount": 127.4
+        },
+        {
+          "date": "2026-04-08",
+          "amount": 980
+        },
+        {
+          "date": "2026-04-09",
+          "amount": 21340
+        },
+        {
+          "date": "2026-04-10",
+          "amount": 7692
+        },
+        {
+          "date": "2026-04-11",
+          "amount": 6850
+        },
+        {
+          "date": "2026-04-12",
+          "amount": 3777
+        }
+      ]
+    },
+    {
+      "name": "Divers",
+      "total": 63285,
+      "avg": 7031.666666666667,
+      "trend": [
+        {
+          "date": "2026-04-01",
+          "amount": 660
+        },
+        {
+          "date": "2026-04-02",
+          "amount": 7011
+        },
+        {
+          "date": "2026-04-03",
+          "amount": 20542
+        },
+        {
+          "date": "2026-04-06",
+          "amount": 8394
+        },
+        {
+          "date": "2026-04-07",
+          "amount": 5633
+        },
+        {
+          "date": "2026-04-08",
+          "amount": 6958
+        },
+        {
+          "date": "2026-04-09",
+          "amount": 3642
+        },
+        {
+          "date": "2026-04-10",
+          "amount": 8131
+        },
+        {
+          "date": "2026-04-11",
+          "amount": 2314
+        }
+      ]
+    },
+    {
+      "name": "Armées",
+      "total": 155465.8,
+      "avg": 51821.93333333333,
+      "trend": [
+        {
+          "date": "2026-04-02",
+          "amount": 129745.8
+        },
+        {
+          "date": "2026-04-03",
+          "amount": 3400
+        },
+        {
+          "date": "2026-04-08",
+          "amount": 22320
+        }
+      ]
+    },
+    {
+      "name": "Cessions Internes",
+      "total": 11280,
+      "avg": 5640,
+      "trend": [
+        {
+          "date": "2026-04-01",
+          "amount": 10000
+        },
+        {
+          "date": "2026-04-11",
+          "amount": 1280
+        }
+      ]
+    }
+  ],
+  "dailyTrend": [
+    {
+      "date": "2026-04-01",
+      "amount": 2555243.959987794
+    },
+    {
+      "date": "2026-04-02",
+      "amount": 2817686.1199999987
+    },
+    {
+      "date": "2026-04-03",
+      "amount": 1872276.3699999999
+    },
+    {
+      "date": "2026-04-04",
+      "amount": 613207.9000000001
+    },
+    {
+      "date": "2026-04-05",
+      "amount": 407021.80000000005
+    },
+    {
+      "date": "2026-04-06",
+      "amount": 3485588.2010000027
+    },
+    {
+      "date": "2026-04-07",
+      "amount": 3550223.8800000036
+    },
+    {
+      "date": "2026-04-08",
+      "amount": 3174921.8420000025
+    },
+    {
+      "date": "2026-04-09",
+      "amount": 4181788.5300000007
+    },
+    {
+      "date": "2026-04-10",
+      "amount": 2942768.7399999993
+    },
+    {
+      "date": "2026-04-11",
+      "amount": 2066802.2999999993
+    },
+    {
+      "date": "2026-04-12",
+      "amount": 997326.9
+    }
+  ]
+}
