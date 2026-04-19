@@ -117,28 +117,79 @@ function App() {
           let montant = 0;
           let dateVal = null;
           
+          let epaiementAmt = 0;
+          let etatAmt = 0;
+          let isEpaiementCat = false;
+          let isEtatCat = false;
+          let modeTextStr = "";
+          let etatTextStr = "";
+          
           for (let key in row) {
              const normKey = normalizeKey(key);
+             const rawVal = row[key];
+             const strVal = String(rawVal).toUpperCase().trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
              // Detection ID Centre
              if (normKey.includes('CENTRE') || normKey.includes('EXP') || normKey.includes('CODE') || normKey === 'ID' || normKey === 'N') {
-                const val = String(row[key]);
-                const match = val.match(/\d+/);
+                const match = strVal.match(/\d+/);
                 if (match) expId = parseInt(match[0]);
              }
-             // Detection Montant
+             // Detection Montant Global
              if (normKey.includes('MONT') || normKey.includes('ENCAISS') || normKey.includes('VOLUME') || normKey.includes('NET') || normKey.includes('TOTAL') || normKey.includes('CUMUL') || normKey.includes('PERCU') || normKey.includes('VALEUR')) {
-                let val = row[key];
-                if (typeof val === 'string') val = val.replace(/,/g, '').replace(/ /g, '');
-                montant = parseFloat(val) || 0;
+                let parsed = parseFloat(String(rawVal).replace(/[^0-9.-]/g, ''));
+                if (!isNaN(parsed)) montant = parsed;
              }
              // Detection Date
              if (normKey.includes('DATE') || normKey.includes('JOUR')) {
-                dateVal = row[key];
+                dateVal = rawVal;
+             }
+
+             // Capture Texte Littéral
+             if (normKey === 'MODE PAIEMENT' || normKey === 'MODE_PAIEMENT' || normKey === 'MODE DE PAIEMENT') {
+                if (rawVal) modeTextStr = String(rawVal).trim();
+             }
+             if (normKey === 'ETAT') {
+                if (rawVal) etatTextStr = String(rawVal).trim();
+             }
+
+             // --- DETECTION CATEGORIQUE ---
+             if (strVal.includes('E-PAI') || strVal.includes('EPAI') || strVal.includes('DIGIT') || strVal.includes('BANKILY') || strVal.includes('MASRIVI') || strVal.includes('BILY') || strVal.includes('SEDAD') || strVal.includes('SADAD') || strVal.includes('BOB')) {
+                isEpaiementCat = true;
+             }
+             if (strVal === 'ETAT' || strVal === 'ADMINISTRATION' || strVal === 'GOUV' || strVal.includes('MINIST')) {
+                isEtatCat = true;
+             }
+
+             // --- DETECTION COLONNE VALEUR EXACTE ---
+             if (normKey === 'MODE PAIEMENT' || normKey.includes('MODE PAIE') || normKey.includes('E-PAI') || normKey.includes('EPAI') || normKey.includes('DIGITAL') || normKey.includes('ELECTRONIQUE')) {
+                let val = String(rawVal).replace(/\s+/g, '').replace(/,/g, '.');
+                let parsed = parseFloat(val);
+                if (!isNaN(parsed)) epaiementAmt = parsed;
+             }
+             if (normKey === 'ETAT' || normKey === 'ÉTAT' || normKey.includes('ADMINISTRATION') || normKey.includes('GOUVERNEMENT')) {
+                let val = String(rawVal).replace(/\s+/g, '').replace(/,/g, '.');
+                let parsed = parseFloat(val);
+                if (!isNaN(parsed)) etatAmt = parsed;
              }
           }
 
-          if (expId && !isNaN(expId) && montant > 0) {
-            cleanedData.push({ id: expId, montant: montant, date: dateVal, day: getDayFromDate(dateVal) })
+          if (expId && !isNaN(expId) && (montant > 0 || epaiementAmt > 0 || etatAmt > 0 || modeTextStr || etatTextStr)) {
+            let finalEpaiement = epaiementAmt > 0 ? epaiementAmt : (isEpaiementCat ? montant : 0);
+            let finalEtat = etatAmt > 0 ? etatAmt : (isEtatCat ? montant : 0);
+            
+            // Si le fichier ne contient *que* des colonnes E-paiement/Etat sans montant global, on additionne pour le montant
+            if (montant === 0) montant = finalEpaiement + finalEtat;
+
+            cleanedData.push({ 
+               id: expId, 
+               montant: montant, 
+               epaiement: finalEpaiement, 
+               etat: finalEtat, 
+               modeText: modeTextStr,
+               etatText: etatTextStr,
+               date: dateVal, 
+               day: getDayFromDate(dateVal) 
+            })
           }
         })
         
@@ -169,9 +220,23 @@ function App() {
 
     const mCurAgg = {};
     const mPrevAgg = {};
+    const mCurEpaiementAgg = {};
+    const mCurEtatAgg = {};
+    const mCurModeBreakdown = {};
+    const mCurEtatBreakdown = {};
 
     rawCurrent.forEach(r => { 
-      if (r.id) mCurAgg[r.id] = (mCurAgg[r.id] || 0) + (r.montant || 0); 
+      if (r.id) {
+        mCurAgg[r.id] = (mCurAgg[r.id] || 0) + (r.montant || 0); 
+        mCurEpaiementAgg[r.id] = (mCurEpaiementAgg[r.id] || 0) + (r.epaiement || 0);
+        mCurEtatAgg[r.id] = (mCurEtatAgg[r.id] || 0) + (r.etat || 0);
+        
+        if (!mCurModeBreakdown[r.id]) mCurModeBreakdown[r.id] = {};
+        if (r.modeText) mCurModeBreakdown[r.id][r.modeText] = (mCurModeBreakdown[r.id][r.modeText] || 0) + (r.montant || 0);
+        
+        if (!mCurEtatBreakdown[r.id]) mCurEtatBreakdown[r.id] = {};
+        if (r.etatText) mCurEtatBreakdown[r.id][r.etatText] = (mCurEtatBreakdown[r.id][r.etatText] || 0) + (r.montant || 0);
+      }
     });
     rawPrev.forEach(r => {
        if (r.id && (typeof r.day !== 'number' || r.day <= maxDayCurrent)) {
@@ -187,11 +252,37 @@ function App() {
       
       const mCur = mCurAgg[id] || 0;
       const mPrev = mPrevAgg[id] || 0;
+      const mEpaiement = mCurEpaiementAgg[id] || 0;
+      const mEtat = mCurEtatAgg[id] || 0;
+      
       const obj = (centerInfo && centerInfo.objectif) ? centerInfo.objectif : 0;
       const name = (centerInfo && centerInfo.name) ? centerInfo.name : 'Centre #' + id;
       const zone = getZoneById(id);
       
       const tauxAtteinte = obj > 0 ? (mCur / obj) * 100 : 0;
+      const pct_epaiement = mCur > 0 ? (mEpaiement / mCur) * 100 : 0;
+      const pct_etat = mCur > 0 ? (mEtat / mCur) * 100 : 0;
+      
+      // Construire la chaîne détaillée avec pourcentages
+      let modeTextArr = [];
+      if (mCurModeBreakdown[id] && mCur > 0) {
+         for (let modeName in mCurModeBreakdown[id]) {
+            let amt = mCurModeBreakdown[id][modeName];
+            let pct = Math.round((amt / mCur) * 100);
+            if (pct > 0) modeTextArr.push(`${modeName} (${pct}%)`);
+         }
+      }
+      const modeTextStr = modeTextArr.length > 0 ? modeTextArr.join(' - ') : '-';
+
+      let etatTextArr = [];
+      if (mCurEtatBreakdown[id] && mCur > 0) {
+         for (let modeName in mCurEtatBreakdown[id]) {
+            let amt = mCurEtatBreakdown[id][modeName];
+            let pct = Math.round((amt / mCur) * 100);
+            if (pct > 0) etatTextArr.push(`${modeName} (${pct}%)`);
+         }
+      }
+      const etatTextStr = etatTextArr.length > 0 ? etatTextArr.join(' - ') : '-';
       
       return {
         id,
@@ -201,7 +292,13 @@ function App() {
         prev_total: Math.round(mPrev),
         objectif: Math.round(obj),
         ecart_mois: Math.round(mCur) - Math.round(mPrev),
-        taux_atteinte: Math.round(tauxAtteinte)
+        taux_atteinte: Math.round(tauxAtteinte),
+        epaiement: Math.round(mEpaiement),
+        etat: Math.round(mEtat),
+        mode_paiement_str: modeTextStr,
+        etat_str: etatTextStr,
+        pct_epaiement: Math.round(pct_epaiement),
+        pct_etat: Math.round(pct_etat)
       };
     }).filter(c => c.zone !== 'AUTRES' && (c.current_total > 0 || c.prev_total > 0 || ALL_EXP_IDS.includes(c.id)))
       .sort((a,b) => b.current_total - a.current_total);
@@ -259,17 +356,23 @@ function App() {
     let current = 0;
     let prev = 0;
     let obj = 0;
+    let ep = 0;
+    let etat = 0;
     analyzedData.forEach(c => {
        if (c.zone !== 'AUTRES') {
          current += (c.current_total || 0);
          prev += (c.prev_total || 0);
          obj += (c.objectif || 0);
+         ep += (c.epaiement || 0);
+         etat += (c.etat || 0);
        }
     });
     const gap = current - obj;
     const rate = obj > 0 ? Math.round(Math.abs((current / obj) * 100)) : 0;
     const ecart = current - prev;
-    return { current, prev, obj, gap, rate, ecart };
+    const rateEP = current > 0 ? Math.round((ep / current) * 100) : 0;
+    const rateEtat = current > 0 ? Math.round((etat / current) * 100) : 0;
+    return { current, prev, obj, gap, rate, ecart, ep, etat, rateEP, rateEtat };
   }, [analyzedData]);
 
   const exportToExcel = () => {
@@ -335,7 +438,7 @@ function App() {
       {v: grandTotalSNDE.ecart, s: getGapStyle(grandTotalSNDE.ecart)}
     ]);
     
-    // --- FEUILLE 2 : BASE DE DONNÉES COMPARATIVE ---
+    // --- FEUILLE 2 : TAUX OBJECTIF ---
     const dataFeuille2 = [];
     dataFeuille2.push([
       {v:"Zone", s:H_STYLE}, 
@@ -355,7 +458,8 @@ function App() {
          {v:"", s:ZONE_STYLE}, 
          {v:"", s:ZONE_STYLE}
        ]);
-       centers.forEach(c => {
+       const sortedCenters = [...centers].sort((a,b) => (b.current_total - b.objectif) - (a.current_total - a.objectif));
+       sortedCenters.forEach(c => {
          const gap = c.current_total - c.objectif;
          dataFeuille2.push([
             {v: zone}, 
@@ -391,15 +495,46 @@ function App() {
        {v:`${grandTotalSNDE.rate}%`, s: Object.assign({}, getBadgeStyle(), SNDE_STYLE)}
     ]);
 
+    // --- FEUILLE 3 : MODE PAIEMENT ET ETAT ---
+    const dataFeuille3 = [];
+    dataFeuille3.push([
+      {v:"Zone", s:H_STYLE}, 
+      {v:"Centre", s:H_STYLE}, 
+      {v:"POURCENTAGE MODE PAIEMENT", s:H_STYLE}, 
+      {v:"POURCENTAGE Etat", s:H_STYLE}
+    ]);
+    
+    Object.entries(groupedData).forEach(([zone, centers]) => {
+       dataFeuille3.push([
+         {v: `ZONE ${zone} (${centers.length} centres)`, s: ZONE_STYLE}, 
+         {v:"", s:ZONE_STYLE}, {v:"", s:ZONE_STYLE}, {v:"", s:ZONE_STYLE}
+       ]);
+       
+       const sortedCenters = [...centers].sort((a,b) => b.current_total - a.current_total);
+       sortedCenters.forEach(c => {
+         dataFeuille3.push([
+            {v: zone}, 
+            {v: c.name}, 
+            {v: c.mode_paiement_str, s: {font: {bold:true}}}, 
+            {v: c.etat_str, s: {font: {bold:true}}}
+         ]);
+       });
+       
+       dataFeuille3.push([]); 
+    });
+
     const ws1 = XLSX.utils.aoa_to_sheet(dataFeuille1);
     const ws2 = XLSX.utils.aoa_to_sheet(dataFeuille2);
+    const ws3 = XLSX.utils.aoa_to_sheet(dataFeuille3);
 
     ws1['!cols'] = [{wch:25}, {wch:8}, {wch:25}, {wch:25}, {wch:25}, {wch:18}];
     ws2['!cols'] = [{wch:25}, {wch:25}, {wch:18}, {wch:18}, {wch:18}, {wch:20}];
+    ws3['!cols'] = [{wch:25}, {wch:25}, {wch:40}, {wch:40}];
 
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, ws1, "Comparaison Globale");
-    XLSX.utils.book_append_sheet(workbook, ws2, "Base de Données");
+    XLSX.utils.book_append_sheet(workbook, ws2, "TAUX OBJECTIF");
+    XLSX.utils.book_append_sheet(workbook, ws3, "MODES PAIEMENT");
     
     XLSX.writeFile(workbook, "Rapport_Encaissements_SNDE.xlsx");
   };
@@ -594,7 +729,7 @@ function App() {
 
               <div className="glass-card" style={{ padding: '0', overflow: 'hidden' }}>
                   <div style={{ padding: '2rem 2.5rem', borderBottom: '1px solid var(--glass-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                     <h3 style={{ fontSize: '1.5rem', fontWeight: 800 }}>Base de Données Comparative</h3>
+                     <h3 style={{ fontSize: '1.5rem', fontWeight: 800 }}>TAUX OBJECTIF</h3>
                      <div style={{ background: 'rgba(0,0,0,0.03)', border: '1px solid var(--glass-border)', borderRadius: '12px', padding: '8px 16px', display: 'flex', alignItems: 'center', gap: '10px' }}>
                         <Search size={18} color="var(--text-muted)" />
                         <input type="text" placeholder="Recherche Rapide..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} style={{ background: 'transparent', border: 'none', color: 'var(--text-main)', outline: 'none', fontSize: '0.9rem', width: '200px' }} />
@@ -635,7 +770,7 @@ function App() {
                                           ZONE {zone} <span style={{ fontSize: '0.85rem', opacity: 0.8, marginLeft: '8px', fontWeight: 700 }}>({centers.length} centres)</span>
                                        </td>
                                     </tr>
-                                    {centers.map((c, i) => {
+                                    {[...centers].sort((a,b) => (b.current_total - b.objectif) - (a.current_total - a.objectif)).map((c, i) => {
                                        const gapToGoal = c.current_total - c.objectif;
                                        return (
                                           <motion.tr key={`${zone}-${c.id}`} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
@@ -684,6 +819,61 @@ function App() {
                                  </span>
                               </td>
                            </tr>
+                        </tbody>
+                     </table>
+                  </div>
+               </div>
+
+               <div className="glass-card" style={{ padding: '0', overflow: 'hidden', marginTop: '3rem' }}>
+                  <div style={{ padding: '2rem 2.5rem', borderBottom: '1px solid var(--glass-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                     <h3 style={{ fontSize: '1.5rem', fontWeight: 800 }}>MODE D'E-PAIEMENT ET ETAT</h3>
+                  </div>
+                  <div style={{ maxHeight: '600px', overflowY: 'auto', padding: '1rem' }}>
+                     <table className="modern-table">
+                         <thead style={{ background: '#0284c7', color: '#fff', fontSize: '1rem' }}>
+                            <tr>
+                               <th style={{ padding: '15px 12px', color: '#fff' }}>Zone</th>
+                               <th style={{ padding: '15px 12px', color: '#fff' }}>Centre d'Activité</th>
+                               <th style={{ padding: '15px 12px', color: '#fff' }}>POURCENTAGE MODE PAIEMENT</th>
+                               <th style={{ padding: '15px 12px', color: '#fff' }}>POURCENTAGE Etat</th>
+                            </tr>
+                         </thead>
+                        <tbody>
+                           {Object.entries(groupedData).map(([zone, centers]) => {
+                              let zBg = '#f1f5f9', zText = '#334155', zBorder = '#64748b';
+                              if (zone.includes('NKTT')) { zBg = '#e0e7ff'; zText = '#3730a3'; zBorder = '#4f46e5'; }
+                              else if (zone.includes('NDB')) { zBg = '#cffafe'; zText = '#164e63'; zBorder = '#0891b2'; }
+                              else if (zone.includes('EST')) { zBg = '#ffedd5'; zText = '#9a3412'; zBorder = '#ea580c'; }
+                              else if (zone.includes('SUD')) { zBg = '#dcfce7'; zText = '#166534'; zBorder = '#16a34a'; }
+                              else if (zone.includes('NORD')) { zBg = '#f3e8ff'; zText = '#6b21a8'; zBorder = '#9333ea'; }
+                              else if (zone.includes('CENTRE')) { zBg = '#fee2e2'; zText = '#991b1b'; zBorder = '#dc2626'; }
+                              else if (zone.includes('TRARZA')) { zBg = '#fef3c7'; zText = '#92400e'; zBorder = '#d97706'; }
+
+                              return (
+                                 <React.Fragment key={zone}>
+                                    <tr style={{ background: zBg, borderLeft: `6px solid ${zBorder}`, borderBottom: '1px solid rgba(0,0,0,0.05)' }}>
+                                       <td colSpan={4} style={{ fontWeight: 900, color: zText, padding: '18px 24px', textTransform: 'uppercase', letterSpacing: '1px', fontSize: '1.2rem' }}>
+                                          ZONE {zone} <span style={{ fontSize: '0.85rem', opacity: 0.8, marginLeft: '8px', fontWeight: 700 }}>({centers.length} centres)</span>
+                                       </td>
+                                    </tr>
+                                    {[...centers].sort((a,b) => b.current_total - a.current_total).map((c) => {
+                                       return (
+                                          <motion.tr key={`${zone}-${c.id}-ep`} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                                             <td style={{ fontWeight: 600, color: 'var(--text-muted)', fontSize: '0.8rem' }}>{zone}</td>
+                                             <td>
+                                                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                                   <span style={{ fontWeight: 700 }}>{c.name}</span>
+                                                   <span style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>ID: #{c.id}</span>
+                                                </div>
+                                             </td>
+                                             <td style={{ fontWeight: 800, color: 'var(--accent)', textTransform: 'uppercase' }}>{c.mode_paiement_str}</td>
+                                             <td style={{ fontWeight: 800, color: '#3b82f6', textTransform: 'uppercase' }}>{c.etat_str}</td>
+                                          </motion.tr>
+                                       );
+                                    })}
+                                 </React.Fragment>
+                              );
+                           })}
                         </tbody>
                      </table>
                   </div>
